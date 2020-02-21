@@ -1,3 +1,4 @@
+var quote = require('./lib/quote.js');
 var express = require('express');
 var app = express();
 
@@ -10,24 +11,13 @@ app.set('port', process.env.PORT || 3000);
 
 //static middleware
 app.use(express.static(__dirname + '/public'));
-
-//array of quotes 
-var quotes = [
-    "\"The best and most beautiful things in the world cannot be seen or even touched - they must be felt with the heart\". -Helen Keller",
-    "\"Imagination is more important than knowledge\". - Albert Einstein",
-    "\"Money can't buy life\". -Bob Marley",
-    "\"When something is important enough, you do it even if the odds are not in your favor\". -Elon Musk",
-    "\"Freedom lies in being bold\". -Robert Frost",
-    "\"However difficult life may seem, there is always something you can do and succeed at\". -Stephen Hawking"
-    ];
     
 app.get('/', function(req, res) {
     res.render('home');
     });
 
 app.get('/about', function(req, res) {
-    var randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-        res.render('about', { quote: randomQuote });
+        res.render('about', { quote: quote.getQuote() });
     });
     
     // 404 catch-all handler (middleware)
