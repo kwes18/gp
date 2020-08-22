@@ -1,12 +1,49 @@
 <!doctype html>
 <html>
+
 <head>
-<title>Gemstone Paradise</title>
+    <meta charset="UTF-8">
+
+    <title>{{{title}}}</title>
+
+    {{#if showTests}}
+    <link rel="stylesheet" href="/vendor/mocha.css">
+    {{/if}}
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
+
 <body>
-    <header><img src="/img/logo.jpg" alt="Gemstone Paradise Logo" style="height: 200px; width: 200px;"></header>
-<div>
-{{{body}}}
-</div>
+    <header><img id="logo" src="/images/logo.jpg" alt="Gemstone Paradise Logo">
+        <nav class="main">
+            <ul>
+                <li><a href="/">Home</a></li>
+
+            </ul>
+        </nav>
+    </header>
+    {{{body}}}
+    {{#each js}}
+    <script src="/js/{{this}}"></script>
+    {{/each}}
+
+    {{#if showTests}}
+    <div id="mocha"></div>
+    <script src="/vendor/mocha.js"></script>
+    <script src="/vendor/chai.js"></script>
+    <script>
+        mocha.ui('tdd');
+        var assert = chai.assert;
+    </script>
+    <script src="/qa/tests-global.js"></script>
+    {{#if pageTestScript}}
+    <script src="{{pageTestScript}}"></script>
+    {{/if}}
+    <script>mocha.run();</script>
+    {{/if}}
+
 </body>
+
 </html>
