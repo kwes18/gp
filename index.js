@@ -4,7 +4,6 @@ var app = express();
 var bodyParser = require('body-parser');
 
 var handlebars = require('express-handlebars').create({ defaultLayout: 'main' });
-
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 
@@ -34,12 +33,12 @@ app.get('/headers', function(req,res){
 
 //routes
 app.get('/', (req, res) => {
-    res.render('home');
     res.locals.metaTags = { 
-        title: " Home", 
+        title: "Home", 
         description: "handmade wire wrapped gemstone jewelry shop",   
         keywords: "gemstone" 
-    }; 
+    };
+    res.render('home'); 
 });
 
 app.get('/about', (req, res) =>{
